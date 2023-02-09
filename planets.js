@@ -30,15 +30,25 @@ const planets = [
     {
         id: 3,
         name: "Earth",
-        position: 3,
+        positionFromTheSun: 3,
         type: "telluric",
-        radius: "6 378Km",
+        radius: "6 378 Km",
         tempMax: "56,7 celsius degrees",
         tempMin: "-93,2 celsius degrees",
         picture: "https://fr.wikipedia.org/wiki/Terre#/media/Fichier:The_Blue_Marble_(remastered).jpg",
         pictureTitle: "The Blue Marble",
         pictureCopyright: "Apollo 17",
         pictureDate: 1972,
+        numberOfMoons: 1,
+        moons: [
+            {
+                id: 1,
+                name: ["Earth 1", "Moon"],
+                radius: "1 737 Km",
+                tempMax: "123 celsius degrees",
+                tempMin: "-233 celsius degree"
+            }
+        ],
         created: new Date(),
     },
     {

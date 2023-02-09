@@ -1,21 +1,36 @@
 const express = require("express");
+const { success }= require('./helper');
 let planets = require("./planets");
-let univers = require ("./univers")
+let universJson = require ("./univers")
 
 const app  = express();
 const port = 3000;
 
 app.get('/', (req, res) => res.send('Bienvenue !'));
 
-app.get('/api/planets/solar-system/:name', (req, res) => {
-    const name = req.params.name;
-    const planet = Array.isArray(planets) ? planets.find(planet => planet.name == name) : 0;
-    res.send(`Vous avez demandé la planète ${planet.name}`);
-})
+// app.get('/api/planets/solar-system/:name', (req, res) => {
+//     const name = req.params.name;
+//     const planet = Array.isArray(planets) ? planets.find(planet => planet.name == name) : 0;
+//     const message  = "Une planète à bien été trouvée.";
+//     res.json(success(message, planet));
+// })
 
-app.get('/api/planets/solar-system', (req, res) => {
-    res.send(`Il y a ${planets.length} planètes au sein de votre recherche`);
-})
+app.get('/api/univers', (req, res) => {
+    // const name = req.params.name;
+    // const univers = Array.isArray(universJson) ? universJson.find(univers => univers.name == name) : 0;
+    const message  = "Entire Univers's Object";
+    res.json(success(message, universJson));
+});
+
+// app.get('/api/univers/:group/:name', (req, res) => {
+//     const group = req.params.group;
+//     const name = req.params.name;
+//     const findGroup = Array.isArray(universJson) ? universJson.find(univers => univers.group == group) : 0;
+//     const findName = Array.isArray(universJson) ? universJson.find(univers => univers.name == name) : 0;
+
+//     const message  = "coucou";
+//     res.json(success(message, findGroup));
+// })
 
 
 
