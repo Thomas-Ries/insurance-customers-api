@@ -179,9 +179,6 @@ const univers = [
                     created: new Date(),
                 },
             ],
-            moons: {
-
-            },
         },
         exoplanets: {
 

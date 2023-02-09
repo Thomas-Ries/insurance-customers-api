@@ -22,16 +22,4 @@ app.get('/api/univers', (req, res) => {
     res.json(success(message, universJson));
 });
 
-// app.get('/api/univers/:group/:name', (req, res) => {
-//     const group = req.params.group;
-//     const name = req.params.name;
-//     const findGroup = Array.isArray(universJson) ? universJson.find(univers => univers.group == group) : 0;
-//     const findName = Array.isArray(universJson) ? universJson.find(univers => univers.name == name) : 0;
-
-//     const message  = "coucou";
-//     res.json(success(message, findGroup));
-// })
-
-
-
-app.listen(port, () => console.log(`app démarrée sur : http://localhost:${port}`));
+app.listen(port, () => console.log(`app listening on : http://localhost:${port}`));
