@@ -4,10 +4,9 @@
 const express = require('express');
 const morgan = require ('morgan');
 const favicon = require('serve-favicon');
-const { success }= require('./helper');
+const { success, getUniqueId }= require('./helper');
 
-let planets = require('./planets');
-let universJson = require ('./univers');
+let customersApi = require("./customers.js");
 
 
 /**
@@ -26,29 +25,40 @@ app
     .use(morgan('dev'));
 
 /**
- * Endpoints
+ * Endpoints GET
  */
 
 app.get('/', (req, res) => res.send('Bienvenue !'));
 
-app.get('/api/univers', (req, res) => {
-    const message  = "Entire Univers's Object";
-    res.json(success(message, universJson));
+app.get('/api/customers', (req, res) => {
+    const message  = "Entire customers's object";
+    res.json(success(message, customersApi));
 });
 
-app.get('/api/univers/:name', (req, res) => {
+app.get('/api/customers/:name', (req, res) => {
     const name = req.params.name;
-    const univers = Array.isArray(universJson) ? universJson.find(univers => univers.name == name) : 0;
+    const customers = Array.isArray(customersApi) ? customersApi.find(customers => customers.name == name) : 0;
     const message  = `You selected ${name}`;
-    res.json(success(message, univers));
+    res.json(success(message, customers));
 });
 
-// app.get('/api/planets/solar-system/:name', (req, res) => {
-//     const name = req.params.name;
-//     const planet = Array.isArray(planets) ? planets.find(planet => planet.name == name) : 0;
-//     const message  = "Une planète à bien été trouvée.";
-//     res.json(success(message, planet));
-// })
+/**
+ * Endpoints POST
+ */
+
+app.post('/api/customers', (req, res) => {
+    const id = getUniqueId(customersApi);
+    const customerCreated = {
+        ...req.body,
+        ...{
+            id: id,
+            created: new Date(),
+        }
+    };
+    customer.push(customerCreated);
+    const message = `Le client ${customerCreated.firstname} ${customerCreated.lastname} a bien été crée.`;
+    res.json(success(message, customerCreated));
+});
 
 /**
  * Listening
