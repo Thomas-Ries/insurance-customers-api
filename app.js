@@ -1,12 +1,44 @@
-const express = require("express");
+/**
+ * Imports
+ */
+const express = require('express');
+const morgan = require ('morgan');
 const { success }= require('./helper');
-let planets = require("./planets");
-let universJson = require ("./univers")
+
+let planets = require('./planets');
+let universJson = require ('./univers');
+
+
+/**
+ * Variables
+ */
 
 const app  = express();
 const port = 3000;
 
+/**
+ * Middlewares
+ */
+
+app.use(morgan('dev'));
+
+/**
+ * Endpoints
+ */
+
 app.get('/', (req, res) => res.send('Bienvenue !'));
+
+app.get('/api/univers', (req, res) => {
+    const message  = "Entire Univers's Object";
+    res.json(success(message, universJson));
+});
+
+app.get('/api/univers/:name', (req, res) => {
+    const name = req.params.name;
+    const univers = Array.isArray(universJson) ? universJson.find(univers => univers.name == name) : 0;
+    const message  = `You selected ${name}`;
+    res.json(success(message, univers));
+});
 
 // app.get('/api/planets/solar-system/:name', (req, res) => {
 //     const name = req.params.name;
@@ -15,11 +47,7 @@ app.get('/', (req, res) => res.send('Bienvenue !'));
 //     res.json(success(message, planet));
 // })
 
-app.get('/api/univers', (req, res) => {
-    // const name = req.params.name;
-    // const univers = Array.isArray(universJson) ? universJson.find(univers => univers.name == name) : 0;
-    const message  = "Entire Univers's Object";
-    res.json(success(message, universJson));
-});
-
+/**
+ * Listening
+ */
 app.listen(port, () => console.log(`app listening on : http://localhost:${port}`));
