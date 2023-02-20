@@ -3,6 +3,7 @@
  */
 const express = require('express');
 const morgan = require ('morgan');
+const favicon = require('serve-favicon');
 const { success }= require('./helper');
 
 let planets = require('./planets');
@@ -20,7 +21,9 @@ const port = 3000;
  * Middlewares
  */
 
-app.use(morgan('dev'));
+app
+    .use(favicon(__dirname + '/favicon.ico'))
+    .use(morgan('dev'));
 
 /**
  * Endpoints
